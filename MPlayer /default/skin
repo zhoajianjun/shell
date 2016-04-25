@@ -1,0 +1,205 @@
+;
+; Modify line 114 to write codec information to playbar!
+;
+; Készítette: LUIGI
+; A legújabb változat innen mindig letölthetõ: / The new version is there: 
+;   www.x-web.hu/mplayer
+; e-mail: lui77@freemail.hu
+;
+
+section = movieplayer
+
+ window = main
+
+  ;base=bitmap,x,y
+  ; x:            | y:
+  ;  -  0: left   |  -  0: top
+  ;  - -1: center |  - -1: center
+  ;  - -2: right  |  - -2: bottom
+  base = main, -1, -2
+  ;button=bitmap,x,y,sx,sy,msg
+  ; 1. bitmap: pressed  | x,y: position in window
+  ; 2. bitmap: released | msg: name of system message
+  ; 3. bitmap: disabled | sx,sy: size of button
+
+  button = close,      380,   5, 20, 14, evExit
+  button = iconify,    342,   5, 20, 14, evIconify
+  button = fullscreen, 361,   5, 20, 14, evFullScreen
+
+  button = prev,        12,  78, 46, 15, evPrev
+  button = file,       247,  78, 46, 15, evLoad
+  button = stop,       153,  78, 46, 15, evStop
+  button = pause,      106,  78, 46, 15, evPause
+  button = play,        59,  78, 46, 15, evPlay
+  button = next,       200,  78, 46, 15, evNext
+
+  button = volstop,    136, 110, 14, 13, evMute
+  button = balll,      157, 118, 21, 10, evNone;evDecBalance
+  button = ballr,      182, 118, 21, 10, evNone;evIncBalance
+
+  button = bdvd,       308,  24, 36, 12, evPlayDVD
+  button = bvcd,       308,  45, 36, 12, evPlayVCD
+  button = burl,       308,  66, 36, 12, evLoadURL
+  button = bsub1,      308,  87, 36, 12, evLoadSubtitle
+  button = babout,     353,  24, 36, 12, evAbout
+  button = beq,        353,  45, 36, 12, evEqualizer
+  button = blist,      353,  66, 36, 12, evPlaylist
+  button = bsub2,      353,  87, 36, 12, evDropSubtitle
+
+  button = prefs,      308, 108, 27, 16, evPreferences
+  button = s,          335, 108, 27, 16, evSkinBrowser
+  ;button = url,        348,  93, 19, 12, evLoadURL
+  button = aspect,     362, 108, 27, 16, evSetAspect
+
+  button = 10minback,  211, 110, 14, 14, evBackward10min
+  button = 1minback,   225, 110, 14, 14, evBackward1min
+  button = 10secback,  239, 110, 14, 14, evBackward10sec
+  button = 10secforw,  253, 110, 14, 14, evForward10sec
+  button = 1minforw,   267, 110, 14, 14, evForward1min
+  button = 10minforw,  281, 110, 14, 14, evForward10min
+
+  ; hpotmeter=buttonbitmaps,sx,sy,phasebitmaps,phases,default value,x,y,sx,sy,msg
+  hpotmeter = moviepoz,  21,  8, NULL, 500,   0,  12,  98, 284,  8, evSetMoviePosition
+  hpotmeter = ballbutton, 8,  8, NULL,  50,  50, 156, 109,  48,  9, evSetBalance
+  hpotmeter = volbutton, 16, 16, NULL, 100, 100,  13, 109, 118, 18, evSetVolume
+
+  ; potmeter=phasebitmaps,phases,default value,x,y,sx,sy,msg
+  ; potmeter = volbutton, 51, 0, 311, 17, 40, 40, evSetVolume
+
+  ; font=fontname
+  font = symbols
+  font = font3
+  font = font1
+
+  ; dynamic label
+  ; dlabel=x,y,sx,align,fontname,string ...
+  ;  align: 0: right 1: center 2: left
+  ;  str: $1  = hh:mm:ss
+  ;       $2  = mmmm:ss
+  ;       $3  = hh
+  ;       $4  = mm
+  ;       $5  = ss
+  ;       $6  = movie length, hh:mm:ss
+  ;       $7  = movie length, mmmm:ss
+  ;       $v  = volume, xxx.xx%
+  ;       $V  = volume, xxx.x
+  ;       $b  = balance, xxx.xx%
+  ;       $B  = balance, xxx.x
+  ;       $$  = draw $
+  ;       $a  = audio type ( nosound: char n, mono: char m, stereo: char t, etc )
+  ;       $t  = track number
+  ;       $o  = filename
+  ;       $f  = filename with lower case
+  ;       $F  = filename with upper case
+  ;
+  ;       $T  = stream type ( file: f, video cd: v, dvd: d, url: u ), if
+  ;              font contain needed symbol.
+  ;       $p  = draw play symbol, if mplayer is playing movie and font
+  ;              contain playing symbol. ( char p )
+  ;       $s  = draw stop symbol, if mplayer not playing movie and font
+  ;              contain stop symbol. ( char s )
+  ;       $e  = draw pause symbol, if playing is paused and font contain
+  ;              pause symbol ( char e )
+  dlabel = 15, 26, 50, 0,font1, "$t: "
+  dlabel = 40, 26, 250, 0, font1, "$o"
+  ;  dlabel = 15, 26, 290, 0, font1, "k[ZYWV]*Szánto#Lajos"
+  dlabel = 233, 41,  62, 0, symbols, "$1"
+  dlabel = 220, 41,   9, 0, symbols, "$p"
+  dlabel = 220, 41,   9, 0, symbols, "$s"
+  dlabel = 220, 41,   9, 0, symbols, "$e"
+  dlabel = 243, 60,  62, 0,   font3, "$6"
+  dlabel = 150, 44,  60, 0,   font3, "$xx$y"
+  ;  dlabel = 72,  44,  8, 0, font3,   "x"
+  ;  dlabel = 80, 44,  25, 0, font3,   "$y"
+;  dlabel = 85, 44, 60, 0, font3,   "$C"     ; - modify this line to write CODEC (delete ";" character)-
+  ;  dlabel = 70, 42,  92, 1,   font, "volume $v"
+  ;  dlabel = 70, 42,  99, 1,   font, "balance $b"
+  dlabel = 190, 56,  45, 1, symbols, "$a"
+  dlabel =  15, 42,  61, 1, symbols, "$T"
+  dlabel =  15, 60, 100, 0,   font3, "volume: $v"
+  dlabel = 120, 60, 100, 0,   font3, "balance:$B"
+
+
+; dlabel= 230,42,80,10,font3," [ :"
+
+  ; static label
+  ; slabel=x,y,fontname,string ...
+  ; slabel =  10, 10, symbols, "12345 - 67890"
+  ; slabel = 120, 10,    font, "Eyes on Me"
+
+ end
+
+ window = video
+
+  ;base=bitmap,x,y,sx,sy
+  ; x:            | y:
+  ;  -  0: left   |  -  0: top
+  ;  - -1: center |  - -1: center
+  ;  - -2: right  |  - -2: bottom
+  base = sub,-1,-1
+  ; background=r,g,b
+  ; window background color, default is black
+  ; only subwindow, and decimal numbers
+  background = 200,200,0
+
+ end
+
+ window = menu
+
+  ; base=bitmap
+  base = menu
+
+  ; selected=bitmap
+  selected = menus
+
+  ; menu = x,y,width,height,msg
+  menu = 3,   6, 122, 14, evAbout
+  menu = 3,  28, 122, 14, evLoad
+  menu = 3,  43, 122, 14, evNone         ; Add playlist
+  menu = 3,  60, 122, 14, evPlay
+  menu = 3,  84, 122, 14, evPlaylist
+  menu = 3, 100, 122, 14, evEqualizer
+
+  menu = 3, 116, 122, 14, evSkinBrowser
+  menu = 3, 140, 122, 14, evPreferences
+;  menu = 3, 156, 122, 14, evNone
+  menu = 3, 180, 122, 14, evNormalSize
+  menu = 3, 196, 122, 14, evDoubleSize
+  menu = 3, 212, 122, 14, evFullScreen
+  menu = 3, 228, 122, 14, evIconify
+  menu = 3, 244, 122, 14, evExit
+ end
+
+ window = playbar
+  base = playbar, -1, -2
+
+  button = playbar_prev,        3, 16, 23, 20, evPrev
+  button = playbar_file,       26, 16, 23, 20, evLoad
+  button = playbar_stop,       49, 16, 23, 20, evStop
+  button = playbar_pause,      72, 16, 23, 20, evPause
+  button = playbar_play,       95, 16, 23, 20, evPlay
+  button = playbar_next,      118, 16, 23, 20, evNext
+
+  button = playbar_10minback, 259, 16, 46, 20, evBackward10min
+  button = playbar_1minback,  306, 16, 46, 20, evBackward1min
+  button = playbar_10secback, 353, 16, 46, 20, evBackward10sec
+  button = playbar_10secforw, 400, 16, 46, 20, evForward10sec
+  button = playbar_1minforw,  447, 16, 46, 20, evForward1min
+  button = playbar_10minforw, 494, 16, 46, 20, evForward10min
+
+  button = close,             779, 17, 20, 14, evExit
+  button = iconify,           745, 17, 20, 14, evIconify
+  button = fullscreen,        762, 17, 20, 14, evFullScreen
+  button = volstop,           240, 17, 14, 13, evMute
+  button = blist,             624, 18, 36, 12, evPlaylist
+
+  hpotmeter = volbutton, 16, 16, NULL, 100, 100, 146, 16, 90, 16, evSetVolume
+  hpotmeter = moviepoz, 21, 8, NULL, 800, 0, 3, 4, 791, 9, evSetMoviePosition
+  dlabel = 550, 18,  9, 0, symbols, "$p"
+  dlabel = 550, 18,  9, 0, symbols, "$s"
+  dlabel = 550, 18,  9, 0, symbols, "$e"
+  dlabel = 562, 21, 62, 0,   font3, "$1"
+
+ end
+
+end
