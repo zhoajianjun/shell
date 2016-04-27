@@ -1,0 +1,11 @@
+qt:
+#define zjj (qDebug().nospace() \
+    << "   Loc: [" << __FILE__ << "(" << __LINE__ << ")]:").space()
+
+
+qml:
+    如果你使用 Qt Creator ，按下面的路径可以设置：
+
+    projects-->Run-->Run Enviroments，点击Add按钮。
+
+    然后运行你的项目就行了。
