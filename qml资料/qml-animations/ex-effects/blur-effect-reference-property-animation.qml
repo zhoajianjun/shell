@@ -1,5 +1,5 @@
 import QtQuick 1.0
-
+import QtGraphicalEffects 1.0
 Rectangle {
     width: 400; height: 400
     color: "lightblue"
@@ -9,7 +9,7 @@ Rectangle {
         anchors.baseline: parent.verticalCenter
         text: "Qt Quick"; font.pixelSize: 64
         effect: blur
-        
+
         Blur {
             id: blur
             blurRadius: 100

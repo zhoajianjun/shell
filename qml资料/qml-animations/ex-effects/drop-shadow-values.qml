@@ -1,4 +1,5 @@
-import QtQuick 1.0
+import QtQuick 2.5
+import QtGraphicalEffects 1.0
 
 Item {
     width: 1300
@@ -11,7 +12,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.baseline: parent.verticalCenter
             text: "Qt Quick"; font.pixelSize: 64
-            effect: DropShadow {}
+            DropShadow {}
         }
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
@@ -29,7 +30,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.baseline: parent.verticalCenter
             text: "Qt Quick"; font.pixelSize: 64
-            effect: DropShadow { blurRadius: 5 }
+            //DropShadow { blurRadius: 5 }
         }
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
@@ -47,7 +48,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.baseline: parent.verticalCenter
             text: "Qt Quick"; font.pixelSize: 64
-            effect: DropShadow { xOffset: -8 }
+            //effect: DropShadow { xOffset: -8 }
         }
         Text {
             anchors.horizontalCenter: parent.horizontalCenter

@@ -1,4 +1,5 @@
-import QtQuick 1.0
+import QtQuick 2.5
+import QtGraphicalEffects 1.0
 
 Item {
     width: 1000
@@ -31,7 +32,7 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 20
             source: "../images/rocket.svg"
-            effect: Colorize { color: "blue"
+            effects: Colorize { color: "blue"
                                strength: 0.3 }
         }
 
